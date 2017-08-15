@@ -390,6 +390,18 @@ public class StringMultiplication {
         map9.put("8", "1");
         map9.put("9", "0");
         MINUS_MAP.put("9", map9);
+        Map<String, String> map10 = new HashMap<>();
+        map10.put("0", "10");
+        map10.put("1", "9");
+        map10.put("2", "8");
+        map10.put("3", "7");
+        map10.put("4", "6");
+        map10.put("5", "5");
+        map10.put("6", "4");
+        map10.put("7", "3");
+        map10.put("8", "2");
+        map10.put("9", "1");
+        MINUS_MAP.put("10", map10);
     }
 
     private StringMultiplication() {
@@ -506,6 +518,8 @@ public class StringMultiplication {
         if (x.startsWith("-"))
             return "-" + sum(x.replace("-", ""), y);
         //Cases for two positive
+        if (MINUS_MAP.containsKey(x) && MINUS_MAP.get(x).containsKey(y))
+            return MINUS_MAP.get(x).get(y);
         int max = maxOf(x, y);
         if (max == -1)
             return "0";
@@ -519,26 +533,26 @@ public class StringMultiplication {
         boolean hasDecrease = false;
         for (int i = 0; i < Math.max(bigger.length(), smaller.length()); i++) {
             if (i < bigger.length() && i < smaller.length()) {
-                int intBigger = Integer.parseInt(bigger.substring(bigger.length() - i - 1, bigger.length() - i));
-                int intSmaller = Integer.parseInt(smaller.substring(smaller.length() - i - 1, smaller.length() - i));
-                int s = intBigger - intSmaller;
+                String intBigger = bigger.substring(bigger.length() - i - 1, bigger.length() - i);
+                String intSmaller = smaller.substring(smaller.length() - i - 1, smaller.length() - i);
+                String s = minus(intBigger, intSmaller);
                 if (hasDecrease)
-                    s--;
-                sb.insert(0, s < 0 ? s + 10 : s);
-                hasDecrease = s < 0;
+                    s = minus(s, "1");
+                sb.insert(0, s.startsWith("-") ? sum("10", s) : s);
+                hasDecrease = s.startsWith("-");
             } else if (i < smaller.length()) {
-                int intSmaller = Integer.parseInt(smaller.substring(smaller.length() - i - 1, smaller.length() - i));
-                intSmaller = 10 - intSmaller;
+                String intSmaller = smaller.substring(smaller.length() - i - 1, smaller.length() - i);
+                intSmaller = minus("10", intSmaller);
                 if (hasDecrease)
-                    intSmaller--;
-                sb.insert(0, intSmaller < 0 ? intSmaller + 10 : intSmaller);
-                hasDecrease = intSmaller < 0;
+                    intSmaller = minus(intSmaller, "1");
+                sb.insert(0, intSmaller.startsWith("-") ? sum(intSmaller, "10") : intSmaller);
+                hasDecrease = intSmaller.startsWith("-");
             } else {
-                int intBigger = Integer.parseInt(bigger.substring(bigger.length() - i - 1, bigger.length() - i));
+                String intBigger = bigger.substring(bigger.length() - i - 1, bigger.length() - i);
                 if (hasDecrease)
-                    intBigger--;
-                if (intBigger == -1) {
-                    intBigger = 9;
+                    intBigger = minus(intBigger, "1");
+                if (intBigger.equals("-1")) {
+                    intBigger = "9";
                     hasDecrease = true;
                 } else {
                     hasDecrease = false;
