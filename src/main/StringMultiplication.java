@@ -5,9 +5,23 @@ import java.util.Map;
  * @author Jacob Ho
  */
 public class StringMultiplication {
+    Map<String, Integer> mComparisonMap;
 
+    public StringMultiplication() {
+        mComparisonMap = new HashMap<>();
+        mComparisonMap.put("0", 0);
+        mComparisonMap.put("1", 1);
+        mComparisonMap.put("2", 2);
+        mComparisonMap.put("3", 3);
+        mComparisonMap.put("4", 4);
+        mComparisonMap.put("5", 5);
+        mComparisonMap.put("6", 6);
+        mComparisonMap.put("7", 7);
+        mComparisonMap.put("8", 8);
+        mComparisonMap.put("9", 9);
+    }
 
-    public static String sum(String x, String y) {
+    public String sum(String x, String y) {
         StringBuilder sb = new StringBuilder();
         boolean hasIncrease = false;
         for (int i = 0; i < Math.max(x.length(), y.length()); i++) {
@@ -38,7 +52,7 @@ public class StringMultiplication {
         return sb.toString();
     }
 
-    public static String minus(String x, String y) {
+    public String minus(String x, String y) {
         if (x.startsWith("-") && y.startsWith("-"))
             return "-" + sum(x.replace("-", ""), y.replace("-", ""));
         if (y.startsWith("-"))
@@ -79,7 +93,7 @@ public class StringMultiplication {
         return string;
     }
 
-    public static int maxOf(String a, String b) {
+    public int maxOf(String a, String b) {
         //compare +/-
         if (a.startsWith("-") && !b.startsWith("-"))
             return 1;
@@ -92,25 +106,14 @@ public class StringMultiplication {
         if (a.length() < b.length())
             return a.startsWith("-") ? 0 : 1;
         //Cases for either both + or - and same length
-        Map<String, Integer> map = new HashMap<>();
-        map.put("0", 0);
-        map.put("1", 1);
-        map.put("2", 2);
-        map.put("3", 3);
-        map.put("4", 4);
-        map.put("5", 5);
-        map.put("6", 6);
-        map.put("7", 7);
-        map.put("8", 8);
-        map.put("9", 9);
         for (int i = 0; i < a.length(); i++) {
             String ai = a.substring(i, i + 1);
             if (ai.equals("="))
                 continue;
             String bi = b.substring(i, i + 1);
-            if (map.get(ai) < map.get(bi))
+            if (mComparisonMap.get(ai) < mComparisonMap.get(bi))
                 return a.startsWith("-") ? 0 : 1;
-            if (map.get(ai) > map.get(bi))
+            if (mComparisonMap.get(ai) > mComparisonMap.get(bi))
                 return a.startsWith("-") ? 1 : 0;
 
         }
