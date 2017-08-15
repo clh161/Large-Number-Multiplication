@@ -59,8 +59,6 @@ public class StringMultiplication {
     }
 
     public static String minus(String x, String y) {
-        if (x.startsWith("-") && y.startsWith("-"))
-            return "-" + sum(x.replace("-", ""), y.replace("-", ""));
         if (y.startsWith("-"))
             return sum(x, y.replace("-", ""));
         if (x.startsWith("-"))
