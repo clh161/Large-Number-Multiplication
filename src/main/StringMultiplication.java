@@ -5,27 +5,25 @@ import java.util.Map;
  * @author Jacob Ho
  */
 public class StringMultiplication {
+    public static final Map<String, Integer> COMPARISON_MAP = new HashMap<>();
+
     static {
-
+        COMPARISON_MAP.put("0", 0);
+        COMPARISON_MAP.put("1", 1);
+        COMPARISON_MAP.put("2", 2);
+        COMPARISON_MAP.put("3", 3);
+        COMPARISON_MAP.put("4", 4);
+        COMPARISON_MAP.put("5", 5);
+        COMPARISON_MAP.put("6", 6);
+        COMPARISON_MAP.put("7", 7);
+        COMPARISON_MAP.put("8", 8);
+        COMPARISON_MAP.put("9", 9);
     }
 
-    Map<String, Integer> mComparisonMap;
-
-    public StringMultiplication() {
-        mComparisonMap = new HashMap<>();
-        mComparisonMap.put("0", 0);
-        mComparisonMap.put("1", 1);
-        mComparisonMap.put("2", 2);
-        mComparisonMap.put("3", 3);
-        mComparisonMap.put("4", 4);
-        mComparisonMap.put("5", 5);
-        mComparisonMap.put("6", 6);
-        mComparisonMap.put("7", 7);
-        mComparisonMap.put("8", 8);
-        mComparisonMap.put("9", 9);
+    private StringMultiplication() {
     }
 
-    public String sum(String x, String y) {
+    public static String sum(String x, String y) {
         StringBuilder sb = new StringBuilder();
         boolean hasIncrease = false;
         for (int i = 0; i < Math.max(x.length(), y.length()); i++) {
@@ -56,7 +54,7 @@ public class StringMultiplication {
         return sb.toString();
     }
 
-    public String minus(String x, String y) {
+    public static String minus(String x, String y) {
         if (x.startsWith("-") && y.startsWith("-"))
             return "-" + sum(x.replace("-", ""), y.replace("-", ""));
         if (y.startsWith("-"))
@@ -112,7 +110,7 @@ public class StringMultiplication {
         return string;
     }
 
-    public int maxOf(String a, String b) {
+    public static int maxOf(String a, String b) {
         //compare +/-
         if (a.startsWith("-") && !b.startsWith("-"))
             return 1;
@@ -130,9 +128,9 @@ public class StringMultiplication {
             if (ai.equals("="))
                 continue;
             String bi = b.substring(i, i + 1);
-            if (mComparisonMap.get(ai) < mComparisonMap.get(bi))
+            if (COMPARISON_MAP.get(ai) < COMPARISON_MAP.get(bi))
                 return a.startsWith("-") ? 0 : 1;
-            if (mComparisonMap.get(ai) > mComparisonMap.get(bi))
+            if (COMPARISON_MAP.get(ai) > COMPARISON_MAP.get(bi))
                 return a.startsWith("-") ? 1 : 0;
 
         }

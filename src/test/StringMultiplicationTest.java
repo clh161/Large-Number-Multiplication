@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
  */
 public class StringMultiplicationTest {
     private final int mTestCaseCount = 10000;
-    private StringMultiplication mMultiplication = new StringMultiplication();
 
     @Test
     public void sum() throws Exception {
@@ -17,7 +16,7 @@ public class StringMultiplicationTest {
         for (int i = 0; i < mTestCaseCount; i++) {
             int a = getRandomIntMax();
             int b = getRandomIntMax();
-            String sumSring = mMultiplication.sum(String.valueOf(a), String.valueOf(b));
+            String sumSring = StringMultiplication.sum(String.valueOf(a), String.valueOf(b));
             assertEquals(a + "+" + b, String.valueOf(a + b), sumSring);
         }
     }
@@ -27,8 +26,8 @@ public class StringMultiplicationTest {
         for (int i = 0; i < mTestCaseCount; i++) {
             int a = getRandomIntMax();
             int b = getRandomIntMax();
-            int actualResult = mMultiplication.maxOf(String.valueOf(a), String.valueOf(b));
-            int actualResult2 = mMultiplication.maxOf(String.valueOf(a), String.valueOf(a));
+            int actualResult = StringMultiplication.maxOf(String.valueOf(a), String.valueOf(b));
+            int actualResult2 = StringMultiplication.maxOf(String.valueOf(a), String.valueOf(a));
             int expectResult = -1;
             if (a < b)
                 expectResult = 1;
@@ -51,7 +50,7 @@ public class StringMultiplicationTest {
         for (int i = 0; i < mTestCaseCount; i++) {
             int a = getRandomIntMax();
             int b = getRandomIntMax();
-            String sumSring = mMultiplication.minus(String.valueOf(a), String.valueOf(b));
+            String sumSring = StringMultiplication.minus(String.valueOf(a), String.valueOf(b));
             assertEquals(a + "-" + b, String.valueOf(a - b), sumSring);
         }
     }
