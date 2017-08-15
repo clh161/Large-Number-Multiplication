@@ -8,10 +8,12 @@ import static org.junit.Assert.assertEquals;
  * @author Jacob Ho
  */
 public class StringMultiplicationTest {
+    private final int mTestCaseCount = 10000;
+
     @Test
     public void sum() throws Exception {
         Random r = new Random();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < mTestCaseCount; i++) {
             int a = getRandomIntMax();
             int b = getRandomIntMax();
             String sumSring = StringMultiplication.sum(String.valueOf(a), String.valueOf(b));
@@ -21,7 +23,7 @@ public class StringMultiplicationTest {
 
     @Test
     public void maxOf() throws Exception {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < mTestCaseCount; i++) {
             int a = getRandomIntMax();
             int b = getRandomIntMax();
             int actualResult = StringMultiplication.maxOf(String.valueOf(a), String.valueOf(b));
