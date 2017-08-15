@@ -64,4 +64,9 @@ public class StringMultiplicationTest {
         }
     }
 
+    @Test
+    public void removeZero() throws Exception {
+        assertEquals("0", StringMultiplication.removeZero("00000"));
+        assertEquals("10", StringMultiplication.removeZero("00010"));
+    }
 }
