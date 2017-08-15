@@ -127,7 +127,7 @@ public class StringMultiplication {
         //Cases for either both + or - and same length
         for (int i = 0; i < a.length(); i++) {
             String ai = a.substring(i, i + 1);
-            if (ai.equals("="))
+            if (ai.equals("-"))
                 continue;
             String bi = b.substring(i, i + 1);
             if (COMPARISON_MAP.get(ai) < COMPARISON_MAP.get(bi))
