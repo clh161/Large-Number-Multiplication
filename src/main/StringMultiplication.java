@@ -24,6 +24,10 @@ public class StringMultiplication {
     }
 
     public static String sum(String x, String y) {
+        if (x.startsWith("-"))
+            return minus(y, x.substring(1));
+        if (y.startsWith("-"))
+            return minus(x, y.substring(1));
         StringBuilder sb = new StringBuilder();
         boolean hasIncrease = false;
         for (int i = 0; i < Math.max(x.length(), y.length()); i++) {

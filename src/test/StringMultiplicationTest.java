@@ -12,7 +12,6 @@ public class StringMultiplicationTest {
 
     @Test
     public void sum() throws Exception {
-        Random r = new Random();
         for (int i = 0; i < mTestCaseCount; i++) {
             int a = getRandomIntMax();
             int b = getRandomIntMax();
@@ -40,7 +39,7 @@ public class StringMultiplicationTest {
 
     private int getRandomIntMax() {
         Random r = new Random();
-        return r.nextInt((int) Math.sqrt(Integer.MAX_VALUE));
+        return r.nextBoolean() ? -r.nextInt((int) Math.sqrt(Integer.MAX_VALUE)) : r.nextInt((int) Math.sqrt(Integer.MAX_VALUE));
     }
 
 
