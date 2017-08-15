@@ -19,6 +19,22 @@ public class StringMultiplicationTest {
         }
     }
 
+    @Test
+    public void maxOf() throws Exception {
+        for (int i = 0; i < 1000; i++) {
+            int a = getRandomIntMax();
+            int b = getRandomIntMax();
+            int actualResult = StringMultiplication.maxOf(String.valueOf(a), String.valueOf(b));
+            int actualResult2 = StringMultiplication.maxOf(String.valueOf(a), String.valueOf(a));
+            int expectResult = -1;
+            if (a < b)
+                expectResult = 1;
+            if (b < a)
+                expectResult = 0;
+            assertEquals(a + " vs " + b, expectResult, actualResult);
+            assertEquals(a + " vs " + a, -1, actualResult2);
+        }
+    }
 
     private int getRandomIntMax() {
         Random r = new Random();
