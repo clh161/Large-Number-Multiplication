@@ -69,4 +69,10 @@ public class StringMultiplicationTest {
         assertEquals("0", StringMultiplication.removeZero("00000"));
         assertEquals("10", StringMultiplication.removeZero("00010"));
     }
+
+    @Test
+    public void productOftenToPower() throws Exception {
+        assertEquals("123000", StringMultiplication.productOftenToPower("123", 3));
+        assertEquals("10", StringMultiplication.productOftenToPower("1", 1));
+    }
 }
