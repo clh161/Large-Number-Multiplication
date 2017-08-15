@@ -15,7 +15,7 @@ public class StringMultiplicationTest {
             int a = r.nextInt((int) Math.sqrt(Integer.MAX_VALUE));
             int b = r.nextInt((int) Math.sqrt(Integer.MAX_VALUE));
             String sumSring = StringMultiplication.sum(String.valueOf(a), String.valueOf(b));
-            assertEquals(String.valueOf(a + b), sumSring);
+            assertEquals(a + "+" + b, String.valueOf(a + b), sumSring);
         }
     }
 
