@@ -464,6 +464,8 @@ public class StringMultiplication {
     }
 
     public static String sum(String x, String y) {
+        if (x.length() == 1 && y.length() == 1)
+            return SUM_MAP.get(x).get(y);
         if (x.startsWith("-"))
             return minus(y, x.substring(1));
         if (y.startsWith("-"))
@@ -472,25 +474,25 @@ public class StringMultiplication {
         boolean hasIncrease = false;
         for (int i = 0; i < Math.max(x.length(), y.length()); i++) {
             if (i < x.length() && i < y.length()) {
-                int intX = Integer.parseInt(x.substring(x.length() - i - 1, x.length() - i));
-                int intY = Integer.parseInt(y.substring(y.length() - i - 1, y.length() - i));
-                int s = intX + intY;
+                String intX = x.substring(x.length() - i - 1, x.length() - i);
+                String intY = y.substring(y.length() - i - 1, y.length() - i);
+                String s = sum(intX, intY);
                 if (hasIncrease)
-                    s++;
-                sb.insert(0, s % 10);
-                hasIncrease = s > 9;
+                    s = sum(s, "1");
+                sb.insert(0, s.substring(s.length() - 1));
+                hasIncrease = s.length() > 1;
             } else if (i < x.length()) {
-                int intX = Integer.parseInt(x.substring(x.length() - i - 1, x.length() - i));
+                String intX = x.substring(x.length() - i - 1, x.length() - i);
                 if (hasIncrease)
-                    intX++;
-                sb.insert(0, intX % 10);
-                hasIncrease = intX > 9;
+                    intX = sum(intX, "1");
+                sb.insert(0, intX.substring(intX.length() - 1));
+                hasIncrease = intX.length() > 1;
             } else {
-                int intY = Integer.parseInt(y.substring(y.length() - i - 1, y.length() - i));
+                String intY = y.substring(y.length() - i - 1, y.length() - i);
                 if (hasIncrease)
-                    intY++;
-                sb.insert(0, intY % 10);
-                hasIncrease = intY > 9;
+                    intY = sum(intY, "1");
+                sb.insert(0, intY.substring(intY.length() - 1));
+                hasIncrease = intY.length() > 1;
             }
         }
         if (hasIncrease)
