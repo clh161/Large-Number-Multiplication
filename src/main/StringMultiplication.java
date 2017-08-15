@@ -466,15 +466,6 @@ public class StringMultiplication {
         return stringBuilder.toString();
     }
 
-    public static String tenToPower(int p) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(1);
-        for (int i = 0; i < p; i++) {
-            stringBuilder.append(0);
-        }
-        return stringBuilder.toString();
-    }
-
     public static String sum(String x, String y) {
         if (x.length() == 1 && y.length() == 1)
             return SUM_MAP.get(x).get(y);
