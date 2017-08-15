@@ -44,4 +44,16 @@ public class StringMultiplicationTest {
         return r.nextInt((int) Math.sqrt(Integer.MAX_VALUE));
     }
 
+
+    @Test
+    public void minus() throws Exception {
+        Random r = new Random();
+        for (int i = 0; i < mTestCaseCount; i++) {
+            int a = getRandomIntMax();
+            int b = getRandomIntMax();
+            String sumSring = mMultiplication.minus(String.valueOf(a), String.valueOf(b));
+            assertEquals(a + "-" + b, String.valueOf(a - b), sumSring);
+        }
+    }
+
 }

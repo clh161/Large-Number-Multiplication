@@ -5,6 +5,10 @@ import java.util.Map;
  * @author Jacob Ho
  */
 public class StringMultiplication {
+    static {
+
+    }
+
     Map<String, Integer> mComparisonMap;
 
     public StringMultiplication() {
@@ -59,36 +63,51 @@ public class StringMultiplication {
             return sum(x, y.replace("-", ""));
         if (x.startsWith("-"))
             return "-" + sum(x.replace("-", ""), y);
+        //Cases for two positive
+        int max = maxOf(x, y);
+        if (max == -1)
+            return "0";
+        String bigger = x;
+        String smaller = y;
+        if (max == 1) {
+            bigger = y;
+            smaller = x;
+        }
         StringBuilder sb = new StringBuilder();
         boolean hasDecrease = false;
-        for (int i = 0; i < Math.max(x.length(), y.length()); i++) {
-            if (i < x.length() && i < y.length()) {
-                int intX = Integer.parseInt(x.substring(x.length() - i - 1, x.length() - i));
-                int intY = Integer.parseInt(y.substring(y.length() - i - 1, y.length() - i));
-                int s = intX - intY;
+        for (int i = 0; i < Math.max(bigger.length(), smaller.length()); i++) {
+            if (i < bigger.length() && i < smaller.length()) {
+                int intBigger = Integer.parseInt(bigger.substring(bigger.length() - i - 1, bigger.length() - i));
+                int intSmaller = Integer.parseInt(smaller.substring(smaller.length() - i - 1, smaller.length() - i));
+                int s = intBigger - intSmaller;
                 if (hasDecrease)
                     s--;
                 sb.insert(0, s < 0 ? s + 10 : s);
                 hasDecrease = s < 0;
-            } else if (i < x.length()) {
-                int intX = Integer.parseInt(x.substring(x.length() - i - 1, x.length() - i));
+            } else if (i < smaller.length()) {
+                int intSmaller = Integer.parseInt(smaller.substring(smaller.length() - i - 1, smaller.length() - i));
+                intSmaller = 10 - intSmaller;
                 if (hasDecrease)
-                    intX--;
-                sb.insert(0, intX < 0 ? intX + 10 : intX);
-                hasDecrease = intX < 0;
+                    intSmaller--;
+                sb.insert(0, intSmaller < 0 ? intSmaller + 10 : intSmaller);
+                hasDecrease = intSmaller < 0;
             } else {
-                int intY = Integer.parseInt(y.substring(y.length() - i - 1, y.length() - i));
-                intY = 10 - intY;
+                int intBigger = Integer.parseInt(bigger.substring(bigger.length() - i - 1, bigger.length() - i));
                 if (hasDecrease)
-                    intY--;
-                sb.insert(0, intY < 0 ? intY + 10 : intY);
-                hasDecrease = intY < 0;
+                    intBigger--;
+                if (intBigger == -1) {
+                    intBigger = 9;
+                    hasDecrease = true;
+                } else {
+                    hasDecrease = false;
+                }
+                sb.insert(0, intBigger);
             }
         }
         String string = sb.toString();
         while (string.startsWith("0") && string.length() > 1)
             string = string.substring(1, string.length());
-        if (hasDecrease)
+        if (max == 1)
             string = "-" + string;
         return string;
     }
