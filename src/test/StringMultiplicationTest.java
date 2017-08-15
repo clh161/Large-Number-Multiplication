@@ -54,4 +54,14 @@ public class StringMultiplicationTest {
         }
     }
 
+    @Test
+    public void product() throws Exception {
+        for (int i = 0; i < mTestCaseCount; i++) {
+            int a = getRandomIntMax();
+            int b = getRandomIntMax();
+            String sumSring = StringMultiplication.product(String.valueOf(a), String.valueOf(b));
+            assertEquals(a + " x " + b, String.valueOf(a * b), sumSring);
+        }
+    }
+
 }

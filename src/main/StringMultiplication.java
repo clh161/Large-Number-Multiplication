@@ -5,7 +5,8 @@ import java.util.Map;
  * @author Jacob Ho
  */
 public class StringMultiplication {
-    public static final Map<String, Integer> COMPARISON_MAP = new HashMap<>();
+    private static final Map<String, Integer> COMPARISON_MAP = new HashMap<>();
+    private static final Map<String, Map<String, String>> PRODUCT_MAP = new HashMap<>();
 
     static {
         COMPARISON_MAP.put("0", 0);
@@ -20,7 +21,85 @@ public class StringMultiplication {
         COMPARISON_MAP.put("9", 9);
     }
 
+    static {
+        for (int i = 0; i < 10; i++) {
+            Map<String, String> subMap = new HashMap<>();
+            for (int j = 0; j < 10; j++) {
+                subMap.put(String.valueOf(j), String.valueOf(i * j));
+            }
+            PRODUCT_MAP.put(String.valueOf(i), subMap);
+        }
+    }
+
     private StringMultiplication() {
+    }
+
+    public static String product(String x, String y) {
+        boolean isXNegative = x.startsWith("-");
+        boolean isYNegative = y.startsWith("-");
+        if (isXNegative)
+            x = x.substring(1);
+        if (isYNegative)
+            y = y.substring(1);
+        if (x.equals("0") || y.equals("0"))
+            return "0";
+        if (x.length() == 1 && y.length() == 1) {
+            return PRODUCT_MAP.get(x).get(y);
+        }
+        int power = (x.length() > y.length() ? x.length() : y.length()) / 2;
+        String a, b, c, d;
+        if (x.length() > power) {
+            a = x.substring(0, x.length() - power);
+            b = x.substring(x.length() - power);
+        } else {
+            a = "0";
+            b = x;
+        }
+        if (y.length() > power) {
+            c = y.substring(0, y.length() - power);
+            d = y.substring(y.length() - power);
+        } else {
+            c = "0";
+            d = removeZero(y);
+        }
+        a = removeZero(a);
+        b = removeZero(b);
+        c = removeZero(c);
+        d = removeZero(d);
+
+        String ac = product(a, c);
+        String bd = product(b, d);
+        String produceOfSum = product(sum(a, b), sum(c, d));
+        String difference = minus(minus(produceOfSum, ac), bd);
+        String result = sum(sum(productOftenToPower(ac, power * 2), bd), productOftenToPower(difference, power));
+        return isXNegative == isYNegative ? removeZero(result) : "-" + removeZero(result);
+    }
+
+    public static String removeZero(String s) {
+        while (s.startsWith("0")) {
+            s = s.substring(1);
+        }
+        if (s.isEmpty())
+            return "0";
+        return s;
+    }
+
+    public static String productOftenToPower(String c, int p) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(c);
+        for (int i = 0; i < p; i++) {
+            stringBuilder.append(0);
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String tenToPower(int p) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(1);
+        for (int i = 0; i < p; i++) {
+            stringBuilder.append(0);
+        }
+        return stringBuilder.toString();
     }
 
     public static String sum(String x, String y) {
