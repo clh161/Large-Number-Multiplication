@@ -1,5 +1,5 @@
 # StringMultiplication [![Build Status](https://travis-ci.org/clh161/StringMultiplication.svg?branch=master)](https://travis-ci.org/clh161/StringMultiplication)
-Multiplication , addition and subtraction of large number (largest than Long)
+Multiplication , addition and subtraction of large number (larger than Long)
 
 ## Features
 * No number parsing from string
